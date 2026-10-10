@@ -113,6 +113,101 @@ while True:
             if data_barang == []:
                 print("== data kosong ==")
             else:
+                while True:
+                    print(" ")
+                    print("=" * 150)
+                    
+                    print(f"{'No':<5}| {'Kode Barang':<30}| {'Nama Barang':<30}| {'Kategori':<20}| {'harga':<20}| {'Stok':<10}")
+                    print("=" * 150)
+                    
+                    nomor_urut = 1
+                    for barang in data_barang:
+                        print(f"{nomor_urut:<5}| {barang[0]:<30}| {barang[1]:<30}| {barang[2]:<20}| {barang[3]:<20}| {barang[4]:<10}")
+                        nomor_urut += 1
+
+                    print("=" * 150)
+
+                    print("\n=== UBAH BARANG ===")
+                    pilih = input("Masukkan Nomor Barang (0 balik ke menu utama):")
+
+                    if pilih.strip().isdigit():
+                        index_target = int(pilih) - 1
+
+                        if int(pilih) == 0:
+                            print("== Selesai ==")
+                            break
+                        elif index_target >= 0 and index_target < len(data_barang):
+                            print("== Silahkan Masukkan Data Berikut ==")
+
+                            while True:
+                                # Nama Barang
+                                ubah_nama = input("Nama Barang: ")
+                                check_nama = ubah_nama.replace(" ", "")
+                
+                                if 5 <= len(check_nama) <= 60 and check_nama.isalnum():
+                                    nama_barang = ubah_nama.strip().title()
+                                    break
+                                print("== Input tidak valid ==")
+
+                            while True: # Kategori Barang
+                                ubah_kategori = input("Kategori Barang [keyboard | Mouse | Aksesoris | Audio | Kamera | Monitor | Penyimpanan]: ")
+                
+                                match ubah_kategori.lower():
+                                    case "keyboard":
+                                        kategori = "Keyboard"
+                                        break
+                                    case "mouse":
+                                        kategori = "Mouse"
+                                        break
+                                    case "aksesoris":
+                                        kategori = "Aksesoris"
+                                        break
+                                    case "audio":
+                                        kategori = "Audio"
+                                        break
+                                    case "kamera":
+                                        kategori = "Kamera"
+                                        break
+                                    case "monitor":
+                                        kategori = "Monitor"
+                                        break
+                                    case "penyimpanan":
+                                        kategori = "Penyimpanan"
+                                        break
+                                    case _:
+                                        print("== Input tidak valid ==")
+
+                            while True: # Harga
+                                ubah_harga = input("Harga: ")
+                                check_harga = ubah_harga.replace(".", "").replace(",", "")
+                
+                                if ubah_harga.isdigit():
+                                    harga = check_harga.strip()
+                                    break
+                                print("== Input tidak valid ==")
+                
+                            while True: # Stok
+                                    ubah_stok = input("Stok: ").strip()
+                    
+                                    if ubah_stok.isdigit():
+                                        stok = ubah_stok
+                                        break
+                                    print("== Input tidak valid ==")
+
+                            # Memasukkan edit data barang ke dalam list
+                            data_barang[index_target] = [kode_barang, ubah_nama, ubah_kategori, ubah_harga, ubah_stok]
+                            print("Data berhasil diubah")
+                            input("PENCET ENTER UNTUK LANJUT...")
+                        else:
+                            print("== Input tidak valid ==")
+                    else:
+                        print("== Input tidak valid ==")
+
+# ========= HAPUS BARANG
+        case "4": 
+            if data_barang == []:
+                print("== data kosong ==")
+            else:
                 print("=" * 150)
                 
                 print(f"{'No':<5}| {'Kode Barang':<30}| {'Nama Barang':<30}| {'Kategori':<20}| {'harga':<20}| {'Stok':<10}")
@@ -124,78 +219,10 @@ while True:
                     nomor_urut += 1
 
                 print("=" * 150)
-                
-                print("\n=== UBAH BARANG ===")
+
+                print("\n=== HAPUS BARANG ===")
                 pilih = input("Masukkan Nomor Barang:")
-
-                if pilih.strip().isdigit():
-                    index_target = int(pilih) - 1
-
-                    print("== Silahkan Masukkan Data Berikut ==")
-
-                    while True:
-                        # Nama Barang
-                        ubah_nama = input("Nama Barang: ")
-                        check_nama = ubah_nama.replace(" ", "")
-        
-                        if 5 <= len(check_nama) <= 60 and check_nama.isalnum():
-                            nama_barang = ubah_nama.strip().title()
-                            break
-                        print("== Input tidak valid ==")
-
-                    while True: # Kategori Barang
-                        ubah_kategori = input("Kategori Barang [keyboard | Mouse | Aksesoris | Audio | Kamera | Monitor | Penyimpanan]: ")
-        
-                        match ubah_kategori.lower():
-                            case "keyboard":
-                                kategori = "Keyboard"
-                                break
-                            case "mouse":
-                                kategori = "Mouse"
-                                break
-                            case "aksesoris":
-                                kategori = "Aksesoris"
-                                break
-                            case "audio":
-                                kategori = "Audio"
-                                break
-                            case "kamera":
-                                kategori = "Kamera"
-                                break
-                            case "monitor":
-                                kategori = "Monitor"
-                                break
-                            case "penyimpanan":
-                                kategori = "Penyimpanan"
-                                break
-                            case _:
-                                print("== Input tidak valid ==")
-
-                    while True: # Harga
-                        ubah_harga = input("Harga: ")
-                        check_harga = ubah_harga.replace(".", "").replace(",", "")
-        
-                        if ubah_harga.isdigit():
-                            harga = check_harga.strip()
-                            break
-                        print("== Input tidak valid ==")
-        
-                    while True: # Stok
-                            ubah_stok = input("Stok: ").strip()
-            
-                            if ubah_stok.isdigit():
-                                stok = ubah_stok
-                                break
-                            print("== Input tidak valid ==")
-
-                    # Memasukkan edit data barang ke dalam list
-                    data_barang[index_target] = [kode_barang, ubah_nama, ubah_kategori, ubah_harga, ubah_stok]
-                    print("Data berhasil diubah")
-                    input("PENCET ENTER UNTUK LANJUT...")
-                else:
-                    print("== Input tidak valid ==")
-
-
+                
 
 
 # 1. tambahin dibagian insert harga harus punya 000
